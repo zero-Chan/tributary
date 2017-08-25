@@ -1,0 +1,53 @@
+{
+	"sources": {
+		"stdin": {
+			"type": "stdin",
+			"unmarshaler": "json",
+			"processors": [
+				"loggerAlerter", 
+				"timestamp"
+			]
+		},
+		"tcp": {
+			"type": "tcp",
+			"host": "127.0.0.1",
+			"port": 12345,
+			"client_num": 2,
+			"unmarshaler": "json",
+			"processors": [
+				"timestamp"
+			]
+		}
+	},
+	
+	"processors": {
+		"loggerAlerter": {
+			"type": "loggerAlerter",
+			"alert": "error",
+			"shield": "debug"
+		},
+		
+		"timestamp": {
+			"type": "timestamp"
+		}
+	},
+	
+	"sinks": {
+		"dst1": {
+			"type": "stdout",
+			"marshaler": "json",
+			"processors": [
+				"loggerAlerter", 
+				"timestamp"
+			]
+		},
+		
+		"dst2": {
+			"type": "stdout",
+			"marshaler": "json",
+			"processors": [
+				"loggerAlerter"
+			]
+		}
+	}
+}
